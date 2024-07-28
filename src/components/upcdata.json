@@ -198,6 +198,22 @@
             "fibre":"0",
             "carbohydrate":"13.1",
             "energy":"53"
+        },
+        {
+            "upc":"8904063240101",
+            "type":"nonbev",
+            "name":"Haldiram Moong Dal",
+            "image":"https://www.bigbasket.com/media/uploads/p/l/40119463_6-haldiram-moong-dal-del.jpg",
+            "quantity":"100 g",
+            "totalsugar":"1.7",
+            "addedsugar":"0",
+            "fat":"17.5",
+            "veg":"0",
+            "protein":"21.2",
+            "salt":"365.7",
+            "fibre":"12.2",
+            "carbohydrate":"53.8",
+            "energy":"457.5"
         }
 
     ]
