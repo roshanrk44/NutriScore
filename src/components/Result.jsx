@@ -530,6 +530,7 @@ function Result({ data }) {
             <div className='name'>
                 <h1>{item.name}</h1>
             </div>
+            <div className='row'>
             <img className='image' src={item.image} alt={item.name} />
             <div className='table-back'>
             <ul className="table">
@@ -544,12 +545,13 @@ function Result({ data }) {
             </ul>
             </div>
             <div className='block'>
-                <img className={score!=1 ? "hidden" : ""} src={A}/>
-                <img className={score!=2 ? "hidden" : ""} src={B}/>
-                <img className={score!=3 ? "hidden" : ""} src={C}/>
-                <img className={score!=4 ? "hidden" : ""} src={D}/>
-                <img className={score!=5 ? "hidden" : ""} src={E}/>
+                <img className={score!=1 ? "hidden" : "score"} src={A}/>
+                <img className={score!=2 ? "hidden" : "score"} src={B}/>
+                <img className={score!=3 ? "hidden" : "score"} src={C}/>
+                <img className={score!=4 ? "hidden" : "score"} src={D}/>
+                <img className={score!=5 ? "hidden" : "score"} src={E}/>
 
+            </div>
             </div>
         </>
     );

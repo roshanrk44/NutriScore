@@ -2,44 +2,53 @@
 .image{
     height: 350px;
     width: 350px;
-    display: inline-block;
+    /* display: inline-block; */
+    margin-top: 3%;
     border: solid;
     box-shadow: black;
     border-color: black;
     border-radius: 10%;
-    margin-left: 65px;
-    margin-right: 100px;
+    /* margin-left: 65px; */
+    /* margin-right: 100px; */
 }
 .name{
     /* justify-content: center; */
     display: inline-block;
+    justify-content: left;
+    /* align-items: first baseline; */
     background-color: rgb(136, 134, 195);
-    /* width: 100%; */
-    /* border-radius: 10%; */
     font-family: 'lato';
-    font-size: 40px;
+    font-size: 45px;
     color: black;
-    margin-right: 20%;
+    /* margin-right: 30%; */
+    border-radius: 5%;
     margin-left: 7%;
     padding: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
     
 }
+.row{
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-evenly;
+    /* align-items: center; */
+}
 .block{
-    /* margin-top: 20px; */
-    display: inline-block;
+    margin-top: 6%;
+    /* display: inline-block; */
 }
 .hidden{
     display: none;
 }
 .table{
-    display: inline-block;
+    /* display: inline-block; */
     list-style: none;
     font-size: 40px;
     font-family: 'lato';
     /* margin-left: 200px; */
-    margin: 20px;
+    /* margin: 20px; */
+    padding: 20px;
     color: black;
 
 }
@@ -47,5 +56,61 @@
     display: inline-block;
     background-color: white;
     border-radius: 10%;
-    margin-right: 100px;
+    /* margin-right: 100px; */
+}
+/* .score{
+    width: 250px;
+    height: 120px;
+} */
+@media(max-width: 1340px ){
+    .table{
+    font-size: 33px;
+    /* margin: 15px; */
+    padding: 15px;
+    
+    }
+    .image{
+        height: 300px;
+        width: 300px;
+        border-radius: 8%;
+    }
+    .name{
+        font-size: 35px;
+        padding: 15px;
+    }
+   
+}
+@media(max-width: 1200px ){
+    .table{
+    font-size: 25px;
+    /* margin: 15px; */
+    padding: 12px;
+    
+    }
+    .image{
+        height: 260px;
+        width: 260px;
+        border-radius: 8%;
+    }
+    .name{
+        font-size: 30px;
+        padding: 12px;
+    }
+}
+@media(max-width: 1000px ){
+    .table{
+    font-size: 20px;
+    /* margin: 15px; */
+    padding: 10px;
+    
+    }
+    .image{
+        height: 220px;
+        width: 220px;
+        border-radius: 6%;
+    }
+    .name{
+        font-size: 22px;
+        padding: 8px;
+    }
 }

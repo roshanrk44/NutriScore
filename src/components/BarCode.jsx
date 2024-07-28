@@ -37,7 +37,6 @@ const BarcodeScanner = () => {
         console.error(err);
         return;
       }
-      console.log('Initialization finished. Ready to start');
       Quagga.start();
     });
 

@@ -37,9 +37,9 @@ function Input() {
           </button>
         </div>
         <div className="imge">
-          <h1>OR</h1>
+          OR
         </div>
-        <button className="button" onClick={setFlag}>Click to scan Barcode</button>
+        <div className="button-div"><button className="button" onClick={setFlag}>Click to scan Barcode</button></div>
       </div>)
     }
       else if(upc==""&&flag==1)

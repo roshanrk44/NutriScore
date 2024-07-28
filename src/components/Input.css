@@ -1,10 +1,4 @@
-/* body{
-  background-color: rgb(39, 16, 97);
-  font-family: 'lato';
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+
  .search-box{
   display: flex;
   justify-content: center;
@@ -31,13 +25,16 @@
   
   }
   .imge{
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding: 20px;
+    font-family: 'lato';
+    font-size: 30px;
     display: flex;
     justify-content: center;
   }
   .button{
-   margin-left: 41.5%;
-   margin-top: 2%;
+   /* margin-left: 41.5%; */
+   /* margin-top: 2%; */
    width: 250px;
    height: 70px;
    cursor: pointer;
@@ -45,4 +42,77 @@
   font-family: 'lato';
   font-size: 25px;
   background-color: rgb(15, 15, 67);
+  }
+  .button-div{
+    display: flex;
+    /* padding: 20px; */
+    justify-content: center;
+    align-items: center;
+  }
+  @media(max-width: 1300px ){
+    .search{
+      width: 80px;
+      height: 30px;
+      border: 1px solid black;
+      margin-top: 170px;
+      font-size: 0.8rem;
+    
+    }
+    #input-box {
+      width: 650px;
+      height: 12px;
+      padding: 8px;
+      margin-top: 170px;
+      border: 1px solid black;
+      border-radius: 0.2rem;
+      font-size: 0.8rem;
+  
+    }
+    .button{
+      /* margin-left: 37.5%; */
+      /* margin-top: 1.7%; */
+      width: 210px;
+      height: 55px;
+     font-size: 20px;
+    
+     }
+     .imge{
+      /* margin-top: 30px; */
+      padding: 20px;
+      font-size: 25px;
+    }
+  }
+    @media(max-width: 1000px ){
+      .search{
+        width: 60px;
+        height: 24px;
+        border: 1px solid black;
+        margin-top: 140px;
+        font-size: 0.6rem;
+      
+      }
+      #input-box {
+        width: 500px;
+        height: 10px;
+        padding: 6px;
+        margin-top: 140px;
+        border: 1px solid black;
+        border-radius: 0.2rem;
+        font-size: 0.6rem;
+    
+      }
+      .button{
+        /* margin-left: 37.5%; */
+        /* margin-top: 1.7%; */
+        width: 160px;
+        height: 40px;
+       font-size: 16px;
+      
+       }
+       .imge{
+        /* margin-top: 30px; */
+        padding: 16px;
+        font-size: 20px;
+      }
+     
   }
