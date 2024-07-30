@@ -1,5 +1,7 @@
 body {
- background-image: url('./assets/back.jpg');
+ /* background-image: url('./assets/back.jpg'); */
+ background-image: url('https://github.com/bedimcode/responsive-navbar-with-search-and-login/blob/main/assets/img/bg-image.png?raw=true');
+
  background-size:cover;
  font-family: "Kanit", sans-serif;
 }

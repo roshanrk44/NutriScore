@@ -1,32 +1,54 @@
-import { useState } from "react";
 import photo from "../assets/NutriScore_transparent.png"
-import { FaBars, FaTimes } from "react-icons/fa";
-import "./Navbar.css"
-function Navbar(){
-    return(
-        <>
-        <nav className="navbar">
-        <a href="index.html"><img src={photo} className="logo" /></a>
-            <ul className="list">
-                   <li><a href="index.html">Home</a></li>
-                   <li>Manual</li>
-                   <li><a href="https://www.iarc.who.int/wp-content/uploads/2021/09/IARC_Evidence_Summary_Brief_2.pdf" >Documentation</a></li>
-                   <li>Suggestions</li>
-                <li>About us</li>
+import React, { useState } from "react";
+import "./Navbar.css";
+
+const Navbar = () => {
+  const [showMenu, setShowMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleSearch = () => setShowSearch(!showSearch);
+  const toggleLogin = () => setShowLogin(!showLogin);
+
+  return (
+    <>
+      <header className="header" id="header">
+        <nav className="nav">
+          <a href="index.html"><img className="logo" src={photo}/></a>
+
+          <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
+            <ul className="nav__list">
+              <li className="nav__item">
+                <a href="index.html" className="nav__link">Home</a>
+              </li>
+              <li className="nav__item">
+                <a href="#" className="nav__link">Manual</a>
+              </li>
+              <li className="nav__item">
+                <a href="https://www.iarc.who.int/wp-content/uploads/2021/09/IARC_Evidence_Summary_Brief_2.pdf" className="nav__link">Documentation</a>
+              </li>
+              <li className="nav__item">
+                <a href="#" className="nav__link">Compare</a>
+              </li>
+              <li className="nav__item">
+                <a href="#" className="nav__link">Contact Me</a>
+              </li>
             </ul>
-                <div className="line">
-                    <img src="https://icon-library.com/images/hamburger-menu-icon-transparent/hamburger-menu-icon-transparent-4.jpg" width="70px" height="70px"/>
-                    {/* <button><FaBars/></button> */}
-                <ul className="option">
-                <li><a href="index.html">Home</a></li>
-                   <li>Manual</li>
-                   <li><a href="https://www.iarc.who.int/wp-content/uploads/2021/09/IARC_Evidence_Summary_Brief_2.pdf" >Documentation</a></li>
-                   <li>Suggestions</li>
-                <li>About us</li>
-                    </ul>
-                    </div>
+            <div className="nav__close" id="nav-close" onClick={toggleMenu}>
+              <i className="ri-close-line"></i>
+            </div>
+          </div>
+
+          <div className="nav__actions">
+            <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
+              <i className="ri-menu-line"></i>
+            </div>
+          </div>
         </nav>
-        </>
-    )
-}
-export default Navbar
+      </header>
+    </>
+  );
+};
+
+export default Navbar;

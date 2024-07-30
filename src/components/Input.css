@@ -12,7 +12,7 @@
     font-size: 1rem;
     outline: none;
     position: relative;
-
+z-index: 1;
   }
   .search{
     width: 100px;
@@ -22,7 +22,7 @@
     font-size: 1rem;
     cursor: pointer;
     position: relative;
-  
+  z-index: 1;
   }
   .imge{
     /* margin-top: 50px; */
@@ -56,7 +56,7 @@
       border: 1px solid black;
       margin-top: 170px;
       font-size: 0.8rem;
-    
+      /* z-index: -1; */
     }
     #input-box {
       width: 650px;
@@ -66,7 +66,7 @@
       border: 1px solid black;
       border-radius: 0.2rem;
       font-size: 0.8rem;
-  
+      /* z-index: -1; */
     }
     .button{
       /* margin-left: 37.5%; */

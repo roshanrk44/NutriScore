@@ -8,498 +8,515 @@ import E from "../assets/E.svg"
 import "./Result.css";
 
 function Result({ data }) {
-    const [item, setItem] = useState(null);
+    const [product, setProduct] = useState(null);
+    const [status, setStatus] = useState(null);
+
 
     useEffect(() => {
-        // Find the item with the matching UPC code
-        const foundItem = nutdata.find(item => item.upc == data);
-        setItem(foundItem);
+        fetch(`https://world.openfoodfacts.org/api/v3/product/${data}.json`)
+            .then((response) => response.json())
+            .then((res) => {
+                setProduct(res.product);
+                setStatus(res);
+            });
     }, [data]);
 
-    if (!item) {
-        return <div>No data found for UPC: {data}</div>;
+    if (!product&&!status) {
+        return <div className='nofound'>Loading...</div>;
     }
-    let score=0
+    else if(product&&status!="success"&&!product.nutriments||!product&&status!="success")
+    {
+        return <div className='notfound'>not found {data}</div>
+    }
+    let score=0, flag=0
     let energy=0, sugar=0, fats=0, salt=0, veg=0, fibre=0, protein=0
-    if(item.type=="bev")
+    if(product.categories_hierarchy)
+    for(let i=0;i<product.categories_hierarchy.length;i++)
+    {
+        if(product.categories_hierarchy[i]=="en:beverages")
+        {
+            flag=1;
+        }
+    }
+    if(flag==1)
     {
         
-        if(item.energy<7.2)
+        if(product.nutriments.energy_value<7.2)
         {
             energy=0
         }
-        else if(item.energy>=7.2&&item.energy<14.3)
+        else if(product.nutriments.energy_value>=7.2&&product.nutriments.energy_value<14.3)
         {
             energy=1
         }
-        else if(item.energy>=14.3&&item.energy<21.5)
+        else if(product.nutriments.energy_value>=14.3&&product.nutriments.energy_value<21.5)
             {
                 energy=2
             }
-            else if(item.energy>=21.5&&item.energy<28.5)
+            else if(product.nutriments.energy_value>=21.5&&product.nutriments.energy_value<28.5)
                 {
                     energy=3
                 }
-                else if(item.energy>=28.5&&item.energy<35.9)
+                else if(product.nutriments.energy_value>=28.5&&product.nutriments.energy_value<35.9)
                     {
                         energy=4
                     }
-                    else if(item.energy>=35.9&&item.energy<43)
+                    else if(product.nutriments.energy_value>=35.9&&product.nutriments.energy_value<43)
                         {
                             energy=5
                         }
-                        else if(item.energy>=43&&item.energy<50.2)
+                        else if(product.nutriments.energy_value>=43&&product.nutriments.energy_value<50.2)
                             {
                                 energy=6
                             }
-                            else if(item.energy>=50.2&&item.energy<57.4)
+                            else if(product.nutriments.energy_value>=50.2&&product.nutriments.energy_value<57.4)
                                 {
                                     energy=7
                                 }
-                                else if(item.energy>=57.4&&item.energy<64.5)
+                                else if(product.nutriments.energy_value>=57.4&&product.nutriments.energy_value<64.5)
                                     {
                                         energy=8
                                     }
-                                    else if(item.energy>=64.5&&item.energy<72.5)
+                                    else if(product.nutriments.energy_value>=64.5&&product.nutriments.energy_value<72.5)
                                         {
                                             energy=9
                                         }
-                                        else if(item.energy>=72.5)
+                                        else if(product.nutriments.energy_value>=72.5)
                                             {
                                                 energy=10
                                            }
-    if(item.totalsugar<=0)
+    if(product.nutriments.sugars_100g<=0)
     {
         sugar=0
     }
-    else if(item.totalsugar>0&&item.totalsugar<=1.5)
+    else if(product.nutriments.sugars_100g>0&&product.nutriments.sugars_100g<=1.5)
     {
         sugar=1
     }
-    else if(item.totalsugar>1.5&&item.totalsugar<=3)
+    else if(product.nutriments.sugars_100g>1.5&&product.nutriments.sugars_100g<=3)
         {
             sugar=2
         }
-        else if(item.totalsugar>3&&item.totalsugar<=4.5)
+        else if(product.nutriments.sugars_100g>3&&product.nutriments.sugars_100g<=4.5)
             {
                 sugar=3
             }
-            else if(item.totalsugar>4.5&&item.totalsugar<=6)
+            else if(product.nutriments.sugars_100g>4.5&&product.nutriments.sugars_100g<=6)
                 {
                     sugar=4
                 }
-                else if(item.totalsugar>6&&item.totalsugar<=7.5)
+                else if(product.nutriments.sugars_100g>6&&product.nutriments.sugars_100g<=7.5)
                     {
                         sugar=5
                     }
-                    else if(item.totalsugar>7.5&&item.totalsugar<=9)
+                    else if(product.nutriments.sugars_100g>7.5&&product.nutriments.sugars_100g<=9)
                         {
                             sugar=6
                         }
-                        else if(item.totalsugar>9&&item.totalsugar<=10.5)
+                        else if(product.nutriments.sugars_100g>9&&product.nutriments.sugars_100g<=10.5)
                             {
                                 sugar=7
                             }
-                            else if(item.totalsugar>10.5&&item.totalsugar<=12)
+                            else if(product.nutriments.sugars_100g>10.5&&product.nutriments.sugars_100g<=12)
                                 {
                                     sugar=8
                                 }
-                                else if(item.totalsugar>12&&item.totalsugar<=13.5)
+                                else if(product.nutriments.sugars_100g>12&&product.nutriments.sugars_100g<=13.5)
                                     {
                                         sugar=9
                                     }
-                                    else if(item.totalsugar>13.5)
+                                    else if(product.nutriments.sugars_100g>13.5)
                                         {
                                             sugar=10
                                         }
 
-    if(item.fat<=1)
+    if(product.nutriments.fat_100g<=1)
     {
         fats=0
     }
-    else if(item.fat>1&&item.fat<=2)
+    else if(product.nutriments.fat_100g>1&&product.nutriments.fat_100g<=2)
     {
         fats=1
     }
-    else if(item.fat>2&&item.fat<=3)
+    else if(product.nutriments.fat_100g>2&&product.nutriments.fat_100g<=3)
         {
             fats=2
         }
-        else if(item.fat>3&&item.fat<=4)
+        else if(product.nutriments.fat_100g>3&&product.nutriments.fat_100g<=4)
             {
                 fats=3
             }
-            else if(item.fat>4&&item.fat<=5)
+            else if(product.nutriments.fat_100g>4&&product.nutriments.fat_100g<=5)
                 {
                     fats=4
                 }
-                else if(item.fat>5&&item.fat<=6)
+                else if(product.nutriments.fat_100g>5&&product.nutriments.fat_100g<=6)
                     {
                         fats=5
                     }
-                    else if(item.fat>6&&item.fat<=7)
+                    else if(product.nutriments.fat_100g>6&&product.nutriments.fat_100g<=7)
                         {
                             fats=6
                         }
-                        else if(item.fat>7&&item.fat<=8)
+                        else if(product.nutriments.fat_100g>7&&product.nutriments.fat_100g<=8)
                             {
                                 fats=7
                             }
-                            else if(item.fat>8&&item.fat<=9)
+                            else if(product.nutriments.fat_100g>8&&product.nutriments.fat_100g<=9)
                                 {
                                     fats=8
                                 }
-                                else if(item.fat>9&&item.fat<=10)
+                                else if(product.nutriments.fat_100g>9&&product.nutriments.fat_100g<=10)
                                     {
                                         fats=9
             
                                     }
-                                    else if(item.fat>10)
+                                    else if(product.nutriments.fat_100g>10)
                                         {
                                             fats=10
                                         }
-    if(item.salt<=90)
+    if(product.nutriments. sodium_100g<=90)
     {
         salt=0;
     }
-    else if(item.salt>90&&item.salt<=180)
+    else if(product.nutriments. sodium_100g>90&&product.nutriments. sodium_100g<=180)
     {
         salt=1;
     }
-        else if(item.salt>180&&item.salt<=270)
+        else if(product.nutriments. sodium_100g>180&&product.nutriments. sodium_100g<=270)
             {
                 salt=2;
             }
-            else if(item.salt>270&&item.salt<=360)
+            else if(product.nutriments. sodium_100g>270&&product.nutriments. sodium_100g<=360)
                 {
                     salt=3;
                 }
-                else if(item.salt>360&&item.salt<=450)
+                else if(product.nutriments. sodium_100g>360&&product.nutriments. sodium_100g<=450)
                     {
                         salt=4;
                     }
-                    else if(item.salt>450&&item.salt<=540)
+                    else if(product.nutriments. sodium_100g>450&&product.nutriments. sodium_100g<=540)
                         {
                             salt=5;
-                        }  else if(item.salt>540&&item.salt<=630)
+                        }  else if(product.nutriments. sodium_100g>540&&product.nutriments. sodium_100g<=630)
                             {
                                 salt=6;
                             }
-                            else if(item.salt>630&&item.salt<=720)
+                            else if(product.nutriments. sodium_100g>630&&product.nutriments. sodium_100g<=720)
                                 {
                                     salt=7;
                                 }
-                                else if(item.salt>720&&item.salt<=810)
+                                else if(product.nutriments. sodium_100g>720&&product.nutriments. sodium_100g<=810)
                                     {
                                         salt=8;
                                     }
-                                    else if(item.salt>810&&item.salt<=900)
+                                    else if(product.nutriments. sodium_100g>810&&product.nutriments. sodium_100g<=900)
                                         {
                                             salt=9;
                                         }
-                                        else if(item.salt>900)
+                                        else if(product.nutriments. sodium_100g>900)
                                         {
                                             salt=10;
                                         }
-        if(item.veg<=40)
+        if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']<=40)
         {
             veg=0
         }
-        else if(item.veg>40&&item.veg<=60)
+        else if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']>40&&product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']<=60)
         {
             veg=2
         }
-        else if(item.veg>60)
+        else if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']>60)
         {
             veg=4
         }
-        if(item.fibre<=0.7)
+        if(product.nutriments.fiber_100g<=0.7)
         {
             fibre=0
         }
-        else if(item.fibre>0.7&&item.fibre<=1.4)
+        else if(product.nutriments.fiber_100g>0.7&&product.nutriments.fiber_100g<=1.4)
             {
                 fibre=1
             }
-            else if(item.fibre>0.7&&item.fibre<=1.4)
+            else if(product.nutriments.fiber_100g>0.7&&product.nutriments.fiber_100g<=1.4)
                 {
                     fibre=2
                 }
-                else if(item.fibre>1.4&&item.fibre<=2.1)
+                else if(product.nutriments.fiber_100g>1.4&&product.nutriments.fiber_100g<=2.1)
                     {
                         fibre=3
                     }
-                    else if(item.fibre>2.1&&item.fibre<=2.8)
+                    else if(product.nutriments.fiber_100g>2.1&&product.nutriments.fiber_100g<=2.8)
                         {
                             fibre=4
                         }
-                        else if(item.fibre>2.8&&item.fibre<=3.5)
+                        else if(product.nutriments.fiber_100g>2.8&&product.nutriments.fiber_100g<=3.5)
                             {
                                 fibre=5
                             }
-    if(item.protein<=1.6)
+    if(product.nutriments.proteins_100g<=1.6)
     {
         protein=0
     }
-    else if(item.protein>1.6&&item.protein<=3.2)
+    else if(product.nutriments.proteins_100g>1.6&&product.nutriments.proteins_100g<=3.2)
         {
             protein=1
         }
-        else if(item.protein>3.2&&item.protein<=4.8)
+        else if(product.nutriments.proteins_100g>3.2&&product.nutriments.proteins_100g<=4.8)
             {
                 protein=2
             }
-            else if(item.protein>4.8&&item.protein<=6.4)
+            else if(product.nutriments.proteins_100g>4.8&&product.nutriments.proteins_100g<=6.4)
                 {
                     protein=3
                 }
-                else if(item.protein>6.4&&item.protein<=8)
+                else if(product.nutriments.proteins_100g>6.4&&product.nutriments.proteins_100g<=8)
                     {
                         protein=4
                     }
-                    else if(item.protein>8)
+                    else if(product.nutriments.proteins_100g>8)
                         {
                             protein=5
                         }
     }
     else{
-        if(item.energy<80)
+        if(product.nutriments.energy_value<80)
             {
                 energy=0
             }
-            else if(item.energy>=80&&item.energy<160)
+            else if(product.nutriments.energy_value>=80&&product.nutriments.energy_value<160)
             {
                 energy=1
             }
-            else if(item.energy>=160&&item.energy<240)
+            else if(product.nutriments.energy_value>=160&&product.nutriments.energy_value<240)
                 {
                     energy=2
                 }
-                else if(item.energy>=240&&item.energy<320)
+                else if(product.nutriments.energy_value>=240&&product.nutriments.energy_value<320)
                     {
                         energy=3
                     }
-                    else if(item.energy>=320&&item.energy<400)
+                    else if(product.nutriments.energy_value>=320&&product.nutriments.energy_value<400)
                         {
                             energy=4
                         }
-                        else if(item.energy>=400&&item.energy<480)
+                        else if(product.nutriments.energy_value>=400&&product.nutriments.energy_value<480)
                             {
                                 energy=5
                             }
-                            else if(item.energy>=480&&item.energy<560)
+                            else if(product.nutriments.energy_value>=480&&product.nutriments.energy_value<560)
                                 {
                                     energy=6
                                 }
-                                else if(item.energy>=560&&item.energy<640)
+                                else if(product.nutriments.energy_value>=560&&product.nutriments.energy_value<640)
                                     {
                                         energy=7
                                     }
-                                    else if(item.energy>=640&&item.energy<720)
+                                    else if(product.nutriments.energy_value>=640&&product.nutriments.energy_value<720)
                                         {
                                             energy=8
                                         }
-                                        else if(item.energy>=720&&item.energy<800)
+                                        else if(product.nutriments.energy_value>=720&&product.nutriments.energy_value<800)
                                             {
                                                 energy=9
                                             }
-                                            else if(item.energy>=800)
+                                            else if(product.nutriments.energy_value>=800)
                                                 {
                                                     energy=10
                                                }
-      if(item.totalsugar<=4.5)
+      if(product.nutriments.sugars_100g<=4.5)
     {
         sugar=0
     }
-    else if(item.totalsugar>4.5&&item.totalsugar<=9)
+    else if(product.nutriments.sugars_100g>4.5&&product.nutriments.sugars_100g<=9)
     {
         sugar=1
     }
-    else if(item.totalsugar>9&&item.totalsugar<=13.5)
+    else if(product.nutriments.sugars_100g>9&&product.nutriments.sugars_100g<=13.5)
         {
             sugar=2
         }
-        else if(item.totalsugar>13.5&&item.totalsugar<=18)
+        else if(product.nutriments.sugars_100g>13.5&&product.nutriments.sugars_100g<=18)
             {
                 sugar=3
             }
-            else if(item.totalsugar>18&&item.totalsugar<=22.5)
+            else if(product.nutriments.sugars_100g>18&&product.nutriments.sugars_100g<=22.5)
                 {
                     sugar=4
                 }
-                else if(item.totalsugar>22.5&&item.totalsugar<=27)
+                else if(product.nutriments.sugars_100g>22.5&&product.nutriments.sugars_100g<=27)
                     {
                         sugar=5
                     }
-                    else if(item.totalsugar>27&&item.totalsugar<=31)
+                    else if(product.nutriments.sugars_100g>27&&product.nutriments.sugars_100g<=31)
                         {
                             sugar=6
                         }
-                        else if(item.totalsugar>31&&item.totalsugar<=36)
+                        else if(product.nutriments.sugars_100g>31&&product.nutriments.sugars_100g<=36)
                             {
                                 sugar=7
                             }
-                            else if(item.totalsugar>36&&item.totalsugar<=40)
+                            else if(product.nutriments.sugars_100g>36&&product.nutriments.sugars_100g<=40)
                                 {
                                     sugar=8
                                 }
-                                else if(item.totalsugar>40&&item.totalsugar<=45)
+                                else if(product.nutriments.sugars_100g>40&&product.nutriments.sugars_100g<=45)
                                     {
                                         sugar=9
                                     }
-                                    else if(item.totalsugar>45)
+                                    else if(product.nutriments.sugars_100g>45)
                                         {
                                             sugar=10
                                         }
-    if(item.fat<=1)
+    if(product.nutriments.fat_100g<=1)
     {
         fats=0
     }
-    else if(item.fat>1&&item.fat<=2)
+    else if(product.nutriments.fat_100g>1&&product.nutriments.fat_100g<=2)
     {
         fats=1
     }
-    else if(item.fat>2&&item.fat<=3)
+    else if(product.nutriments.fat_100g>2&&product.nutriments.fat_100g<=3)
         {
             fats=2
         }
-        else if(item.fat>3&&item.fat<=4)
+        else if(product.nutriments.fat_100g>3&&product.nutriments.fat_100g<=4)
             {
                 fats=3
             }
-            else if(item.fat>4&&item.fat<=5)
+            else if(product.nutriments.fat_100g>4&&product.nutriments.fat_100g<=5)
                 {
                     fats=4
                 }
-                else if(item.fat>5&&item.fat<=6)
+                else if(product.nutriments.fat_100g>5&&product.nutriments.fat_100g<=6)
                     {
                         fats=5
                     }
-                    else if(item.fat>6&&item.fat<=7)
+                    else if(product.nutriments.fat_100g>6&&product.nutriments.fat_100g<=7)
                         {
                             fats=6
                         }
-                        else if(item.fat>7&&item.fat<=8)
+                        else if(product.nutriments.fat_100g>7&&product.nutriments.fat_100g<=8)
                             {
                                 fats=7
                             }
-                            else if(item.fat>8&&item.fat<=9)
+                            else if(product.nutriments.fat_100g>8&&product.nutriments.fat_100g<=9)
                                 {
                                     fats=8
                                 }
-                                else if(item.fat>9&&item.fat<=10)
+                                else if(product.nutriments.fat_100g>9&&product.nutriments.fat_100g<=10)
                                     {
                                         fats=9
             
                                     }
-                                    else if(item.fat>10)
+                                    else if(product.nutriments.fat_100g>10)
                                         {
                                             fats=10
                                         }
-    if(item.salt<=90)
+    if(product.nutriments. sodium_100g<=90)
     {
         salt=0;
     }
-    else if(item.salt>90&&item.salt<=180)
+    else if(product.nutriments. sodium_100g>90&&product.nutriments. sodium_100g<=180)
     {
         salt=1;
     }
-        else if(item.salt>180&&item.salt<=270)
+        else if(product.nutriments. sodium_100g>180&&product.nutriments. sodium_100g<=270)
             {
                 salt=2;
             }
-            else if(item.salt>270&&item.salt<=360)
+            else if(product.nutriments. sodium_100g>270&&product.nutriments. sodium_100g<=360)
                 {
                     salt=3;
                 }
-                else if(item.salt>360&&item.salt<=450)
+                else if(product.nutriments. sodium_100g>360&&product.nutriments. sodium_100g<=450)
                     {
                         salt=4;
                     }
-                    else if(item.salt>450&&item.salt<=540)
+                    else if(product.nutriments. sodium_100g>450&&product.nutriments. sodium_100g<=540)
                         {
                             salt=5;
-                        }  else if(item.salt>540&&item.salt<=630)
+                        }  else if(product.nutriments. sodium_100g>540&&product.nutriments. sodium_100g<=630)
                             {
                                 salt=6;
                             }
-                            else if(item.salt>630&&item.salt<=720)
+                            else if(product.nutriments. sodium_100g>630&&product.nutriments. sodium_100g<=720)
                                 {
                                     salt=7;
                                 }
-                                else if(item.salt>720&&item.salt<=810)
+                                else if(product.nutriments. sodium_100g>720&&product.nutriments. sodium_100g<=810)
                                     {
                                         salt=8;
                                     }
-                                    else if(item.salt>810&&item.salt<=900)
+                                    else if(product.nutriments. sodium_100g>810&&product.nutriments. sodium_100g<=900)
                                         {
                                             salt=9;
                                         }
-                                        else if(item.salt>900)
+                                        else if(product.nutriments. sodium_100g>900)
                                         {
                                             salt=10;
                                         }
-        if(item.veg<=40)
+        if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']<=40)
         {
             veg=0
         }
-        else if(item.veg>40&&item.veg<=60)
+        else if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']>40&&product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']<=60)
         {
             veg=1
         }
-        else if(item.veg>60&&item.veg<=80)
+        else if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']>60&&product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']<=80)
         {
             veg=2
         }
-        else if(item.veg>80)
+        else if(product.nutriments['fruits-vegetables-legumes-estimate-from-ingredients_100g']>80)
         {
             veg=5
         }
-        if(item.fibre<=0.7)
+        if(product.nutriments.fiber_100g<=0.7)
         {
             fibre=0
         }
-        else if(item.fibre>0.7&&item.fibre<=1.4)
+        else if(product.nutriments.fiber_100g>0.7&&product.nutriments.fiber_100g<=1.4)
             {
                 fibre=1
             }
-            else if(item.fibre>0.7&&item.fibre<=1.4)
+            else if(product.nutriments.fiber_100g>0.7&&product.nutriments.fiber_100g<=1.4)
                 {
                     fibre=2
                 }
-                else if(item.fibre>1.4&&item.fibre<=2.1)
+                else if(product.nutriments.fiber_100g>1.4&&product.nutriments.fiber_100g<=2.1)
                     {
                         fibre=3
                     }
-                    else if(item.fibre>2.1&&item.fibre<=2.8)
+                    else if(product.nutriments.fiber_100g>2.1&&product.nutriments.fiber_100g<=2.8)
                         {
                             fibre=4
                         }
-                        else if(item.fibre>2.8&&item.fibre<=3.5)
+                        else if(product.nutriments.fiber_100g>2.8&&product.nutriments.fiber_100g<=3.5)
                             {
                                 fibre=5
                             }
-    if(item.protein<=1.6)
+    if(product.nutriments.proteins_100g<=1.6)
     {
         protein=0
     }
-    else if(item.protein>1.6&&item.protein<=3.2)
+    else if(product.nutriments.proteins_100g>1.6&&product.nutriments.proteins_100g<=3.2)
         {
             protein=1
         }
-        else if(item.protein>3.2&&item.protein<=4.8)
+        else if(product.nutriments.proteins_100g>3.2&&product.nutriments.proteins_100g<=4.8)
             {
                 protein=2
             }
-            else if(item.protein>4.8&&item.protein<=6.4)
+            else if(product.nutriments.proteins_100g>4.8&&product.nutriments.proteins_100g<=6.4)
                 {
                     protein=3
                 }
-                else if(item.protein>6.4&&item.protein<=8)
+                else if(product.nutriments.proteins_100g>6.4&&product.nutriments.proteins_100g<=8)
                     {
                         protein=4
                     }
-                    else if(item.protein>8)
+                    else if(product.nutriments.proteins_100g>8)
                         {
                             protein=5
                         }
@@ -528,20 +545,21 @@ function Result({ data }) {
     return (
         <>
             <div className='name'>
-                <h1>{item.name}</h1>
+                <h1>{product.product_name}</h1>
             </div>
             <div className='row'>
-            <img className='image' src={item.image} alt={item.name} />
+            <img className='image' src={product.image_front_url} alt={product.product_name} />
             <div className='table-back'>
             <ul className="table">
                 <li><h3 style={{ display: 'inline-block' }}>NUTRITION CHART</h3></li>
-                <li>Serving Per {item.quantity}</li>
-                <li>Total Sugar: {item.totalsugar} g</li>
-                <li>Sodium: {item.salt} mg</li>
-                <li>Protein: {item.protein} g</li>
-                <li>Fat: {item.fat} g</li>
-                <li>Carbohydrate: {item.carbohydrate} g</li>
-                <li>Energy: {item.energy} kcal</li>
+                <li>Serving Per 100 g/ml</li>
+                <li>Total Sugar: {product.nutriments.sugars_100g} g</li>
+                <li>Sodium: {product.nutriments.sodium_100g} mg</li>
+                <li>Protein: {product.nutriments.proteins_100g} g</li>
+                <li>Fat: {product.nutriments.fat_100g} g</li>
+                <li>Carbohydrate: {product.nutriments.carbohydrates_100g} g</li>
+                <li>Energy: {product.nutriments.energy_value} kcal</li>
+                <li>Fiber: {product.nutriments.fiber_value} g</li>
             </ul>
             </div>
             <div className='block'>
