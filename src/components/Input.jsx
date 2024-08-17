@@ -40,6 +40,7 @@ function Input() {
           OR
         </div>
         <div className="button-div"><button className="button" onClick={setFlag}>Click to scan Barcode</button></div>
+        <h2>If you dont have any food product right now you can use these upc code/barcode or you can search for any product upc code from web and search it. upc codes:- 8902080104581, 8901063019027, 8901491366229</h2>
       </div>)
     }
       else if(upc==""&&flag==1)

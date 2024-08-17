@@ -1,10 +1,16 @@
 body {
  /* background-image: url('./assets/back.jpg'); */
- background-image: url('https://github.com/bedimcode/responsive-navbar-with-search-and-login/blob/main/assets/img/bg-image.png?raw=true');
-
+ background-image: url('./assets/bg-image.png');
+/* background-repeat: no-repeat; */
+/* background-color: rgb(17, 27, 34); */
  background-size:cover;
  font-family: "Kanit", sans-serif;
 }
+@media(max-width: 500px ){
+  body{
+ background-image: url('./assets/bg-image-mobile.png');
 
+  }
+}
 
 

@@ -1,5 +1,6 @@
 import photo from "../assets/NutriScore_transparent.png"
 import React, { useState } from "react";
+import {Link} from "react-router-dom"
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -20,19 +21,19 @@ const Navbar = () => {
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <a href="index.html" className="nav__link">Home</a>
+                <Link to="/" className="nav__link">Home</Link>
               </li>
               <li className="nav__item">
-                <a href="#" className="nav__link">Manual</a>
+                <Link to="/Manual" className="nav__link">Manual</Link>
               </li>
               <li className="nav__item">
                 <a href="https://www.iarc.who.int/wp-content/uploads/2021/09/IARC_Evidence_Summary_Brief_2.pdf" className="nav__link">Documentation</a>
               </li>
+              {/* <li className="nav__item">
+                <Link to="/Compare" className="nav__link">Compare</Link>
+              </li> */}
               <li className="nav__item">
-                <a href="#" className="nav__link">Compare</a>
-              </li>
-              <li className="nav__item">
-                <a href="#" className="nav__link">Contact Me</a>
+                <Link to="Contact_me" className="nav__link">Contact Me</Link>
               </li>
             </ul>
             <div className="nav__close" id="nav-close" onClick={toggleMenu}>

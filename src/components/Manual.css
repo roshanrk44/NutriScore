@@ -1,0 +1,58 @@
+/* src/App.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+  }
+  
+  .input {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .box {
+    padding: 8px;
+    width: 500px;
+  }
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+    margin-top: 30px;
+    font-size: 20px;
+  }
+  .dropdown select{
+    font-size: large;
+    font-family: 'lato';
+    margin-left: 20px;
+  }
+  
+  .submit button{
+    width: 140px;
+    height: 50px;
+    cursor: pointer;
+    border: black solid;
+    background-color: #25e6e9;
+    font-size: large;
+    font-family: 'lato';
+  }
+  .submit{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  

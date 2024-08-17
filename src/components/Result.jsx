@@ -22,11 +22,11 @@ function Result({ data }) {
     }, [data]);
 
     if (!product&&!status) {
-        return <div className='nofound'>Loading...</div>;
+        return <div className="notfound">Loading...</div>;
     }
     else if(product&&status!="success"&&!product.nutriments||!product&&status!="success")
     {
-        return <div className='notfound'>not found {data}</div>
+        return <div className="notfound">Item Not Found: {data}</div>
     }
     let score=0, flag=0
     let energy=0, sugar=0, fats=0, salt=0, veg=0, fibre=0, protein=0

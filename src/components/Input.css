@@ -33,8 +33,6 @@ z-index: 1;
     justify-content: center;
   }
   .button{
-   /* margin-left: 41.5%; */
-   /* margin-top: 2%; */
    width: 250px;
    height: 70px;
    cursor: pointer;
@@ -45,9 +43,14 @@ z-index: 1;
   }
   .button-div{
     display: flex;
-    /* padding: 20px; */
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+  }
+  h2{
+    font-family: 'lato';
+    color: white;
+    margin: 40px;
   }
   @media(max-width: 1300px ){
     .search{
@@ -56,7 +59,6 @@ z-index: 1;
       border: 1px solid black;
       margin-top: 170px;
       font-size: 0.8rem;
-      /* z-index: -1; */
     }
     #input-box {
       width: 650px;
