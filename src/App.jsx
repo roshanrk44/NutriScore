@@ -12,10 +12,8 @@ function App() {
   return (
     < >
      <Navbar/>
-    {/* <Input/> */}
     {location.pathname !== '/Contact_me' && <Input />&&location.pathname !== '/Manual' && <Input />}
     <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/Manual" element={<Manual />} />
         <Route path="/Contact_me" element={<Contactme />} />
       </Routes>

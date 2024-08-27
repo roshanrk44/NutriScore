@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <Link to="/" className="nav__link">Home</Link>
+                <a href="index.html" className="nav__link">Home</a>
               </li>
               <li className="nav__item">
                 <Link to="/Manual" className="nav__link">Manual</Link>
@@ -29,9 +29,6 @@ const Navbar = () => {
               <li className="nav__item">
                 <a href="https://www.iarc.who.int/wp-content/uploads/2021/09/IARC_Evidence_Summary_Brief_2.pdf" className="nav__link">Documentation</a>
               </li>
-              {/* <li className="nav__item">
-                <Link to="/Compare" className="nav__link">Compare</Link>
-              </li> */}
               <li className="nav__item">
                 <Link to="Contact_me" className="nav__link">Contact Me</Link>
               </li>
