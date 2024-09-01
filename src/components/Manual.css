@@ -17,6 +17,16 @@
     padding: 8px;
     width: 500px;
   }
+  .score{
+    width: 200px;
+    height: 100px;
+     
+}
+.block{
+display: flex;
+justify-content: center;
+margin-top: 4px;
+}
 .dropbtn {
     background-color: #3498DB;
     color: white;
